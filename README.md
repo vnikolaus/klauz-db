@@ -7,12 +7,10 @@ Ideal para testes automatizados, vídeo-aulas ou aplicações com um grau menor 
 
 * [🌱 Instalação](#-Instalação)
 * [🏗️ Usage (.env)](#%EF%B8%8F-usage)
-<!-- * [🌴 Multiple Environments 🆕](#-manage-multiple-environments)
-* [🚀 Deploying (.env.vault) 🆕](#-deploying)
-* [📚 Examples](#-examples)
 * [📖 Docs](#-documentation)
-* [❓ FAQ](#-faq)
-* [⏱️ Changelog](./CHANGELOG.md) -->
+<!-- * [📚 Examples](#-examples) -->
+<!-- * [❓ FAQ](#-faq) -->
+<!-- * [⏱️ Changelog](./CHANGELOG.md) -->
 
 ## 🌱 Instalação
 
@@ -75,3 +73,6 @@ console.log(collection)
     }
 //
 ```
+
+Com sua collection criada agora você já tem acesso a todas as funções de banco de dados:
+
