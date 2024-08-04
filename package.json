@@ -1,0 +1,49 @@
+{
+  "name": "klauz-db",
+  "version": "0.1.1",
+  "description": "A simple database, for less complex applications",
+  "main": "lib/index.js",
+  "scripts": {
+    "dev": "tsx watch --env-file .env src/client",
+    "build": "tsc",
+    "test-errors": "tsx --env-file .env tests/test-errors.ts",
+    "test": "jest && npm run test-errors",
+    "prepublish": "npm run test && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vnikolaus/klauz-db.git"
+  },
+  "author": "Victor Nikolaus",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vnikolaus/klauz-db/issues"
+  },
+  "homepage": "https://github.com/vnikolaus/klauz-db#readme",
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "setupFiles": [
+      "dotenv/config"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "lib"
+    ]
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "devDependencies": {
+    "@types/jest": "29.5.12",
+    "@types/node": "20.14.11",
+    "jest": "29.7.0",
+    "ts-jest": "29.2.3",
+    "tsx": "4.16.2",
+    "typescript": "5.5.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "zod": "3.23.8"
+  }
+}
