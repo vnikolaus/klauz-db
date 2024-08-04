@@ -14,17 +14,13 @@ export class KlauzDB {
         this.path = path
     }
 
-    createCollection(collectionName: string): Output<Collection> {
-        try {
-            const schema = z.string().min(1)
-            const name = schema.parse(collectionName)
-            const collection = new Collection({
-                name,
-                path: this.path
-            })
-            return collection
-        } catch (err) {
-            return errorMessage(err)
-        }
+    createCollection(collectionName: string): Collection {
+        const schema = z.string().min(1)
+        const name = schema.parse(collectionName)
+        const collection = new Collection({
+            name,
+            path: this.path
+        })
+        return collection
     }
 }

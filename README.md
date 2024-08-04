@@ -1,4 +1,5 @@
-# KlauzDB [![NPM version](https://img.shields.io/npm/v/klauz-db.svg?style=flat-square)](https://www.npmjs.com/package/klauz-db)
+<!-- # KlauzDB [![NPM version](https://img.shields.io/npm/v/klauz-db.svg?style=flat-square)](https://www.npmjs.com/package/klauz-db) -->
+# KlauzDB [![NPM version]]
 
 KlauzDB é um banco de dados orientando a "collections", que utiliza o armazenamento local da máquina para persistir os dados, seguindo sua proposta de ser rápido e de fácil utilização. (*não requer nenhuma conexão externa ou afins*)
 
@@ -62,21 +63,73 @@ const kz = new KlauzDB({
 
 const collection = kz.createCollection('teste')
 
-console.log(collection)
+console.log(collection.content)
 
 // Resultado:
-    Collection { props: { name: 'teste', path: './' } }
-//
-
-// Coleção criada:
     {
     "collection_name": "teste",
-    "created_at": "2024-08-04T22:00:03.950Z",
-    "last_interaction": "2024-08-04T22:00:03.956Z",
+    "created_at": "2024-08-04T22:41:57.416Z",
+    "last_interaction": "2024-08-04T22:41:57.416Z",
     "data": []
     }
 //
 ```
 
 Com sua collection criada agora você já tem acesso a todas as funções de banco de dados:
+
+### add
+
+`add` adiciona um novo objeto (*chave-valor*) dentro da collection.
+
+```js
+const output = collection.add({
+    nome: 'teste',
+    descricao: 'Objeto teste'
+})
+console.log("output: ", output);
+
+// Resultado:
+    {
+    "nome": 'teste',
+    "descricao": 'Objeto teste',
+    "_ObjectId": '85136b83-eb3a-4673-a502-f59b337f8f6a'
+    }
+//
+```
+
+### addMany
+
+`add` adiciona um novo array de objetos (*chave-valor*) dentro da collection.
+
+```js
+const output = collection.addMany([
+    {
+        nome: 'teste 1',
+        descricao: 'Objeto teste 1'
+    },
+    {
+        nome: 'teste 2',
+        descricao: 'Objeto teste 2'
+    }
+])
+console.log("output: ", output);
+
+// Resultado:
+    [
+        {
+            "nome": 'teste 1',
+            "descricao": 'Objeto teste 1',
+            "_ObjectId": '8a636bd6-48d8-479b-8bf4-24146867a692'
+        },
+        {
+            "nome": 'teste 2',
+            "descricao": 'Objeto teste 2',
+            "_ObjectId": 'a71dbb58-b529-419b-a21d-030b3201a948'
+        }
+    ]
+//
+```
+
+
+
 
