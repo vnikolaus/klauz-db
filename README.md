@@ -65,6 +65,10 @@ const collection = kz.createCollection('teste')
 console.log(collection)
 
 // Resultado:
+    Collection { props: { name: 'teste', path: './' } }
+//
+
+// Coleção criada:
     {
     "collection_name": "teste",
     "created_at": "2024-08-04T22:00:03.950Z",
