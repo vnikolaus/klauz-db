@@ -22,7 +22,7 @@ npm install klauz-db --save
 
 Instalação via yarn: `yarn add klauz-db`
 
-## 🏗️ Usage
+## 🏗️ Usabilidade
 
 No começo da sua aplicação, importe o pacote "klauz-db" e defina o path principal para suas collections:
 
@@ -30,7 +30,7 @@ No começo da sua aplicação, importe o pacote "klauz-db" e defina o path princ
 const { KlauzDB } = require('klauz-db')
 
 const kz = new KlauzDB({
-    path: '{seu_path}'
+    path: '{db_path}'
 })
 ```
 
@@ -40,7 +40,7 @@ const kz = new KlauzDB({
 import { KlauzDB } from 'klauz-db'
 
 const kz = new KlauzDB({
-    path: '{seu_path}'
+    path: '{db_path}'
 })
 ```
 
@@ -53,8 +53,19 @@ KlauzDB expõe apenas uma função:
 * `createCollection`
 
 ### createCollection
+`createCollection` cria uma nova *collection* de dados.
 
-`createCollection` cria uma nova *collection*, com base no nome passado na função, retornando sua própria instância.
+#### Syntax
+```js
+createCollection(nomeCollection)
+```
+
+##### Parametros
+`nomeCollection`
+    Nome utilizado (*string*) para criação da Collection e seu arquivo de persistência de dados;
+
+##### Retorno
+    Instãncia propria da Collection habilitando acesso as funções de banco de dados;
 
 ```js
 const kz = new KlauzDB({
@@ -67,9 +78,9 @@ console.log(collection.information)
 
 // Resultado:
     {
-    "collection_name": "coll-teste",
-    "created_at": "2024-08-25T22:41:57.416Z",
-    "last_interaction": "2024-08-25:41:57.416Z",
+        "collection_name": "coll-teste",
+        "created_at": "2024-08-25T22:41:57.416Z",
+        "last_interaction": "2024-08-25:41:57.416Z",
     }
 //
 ```
@@ -86,21 +97,18 @@ const output = collection.add({
     idade: 28,
     admin: true
 })
-console.log("output: ", output);
 
+console.log("output: ", output);
 // Resultado:
     {
-    "data": [
-        {
-            "nome": 'Victor',
-            "idade": 28,
-            "admin": true,
-            "_zid_": '85136b83-eb3a-4673-a502-f59b337f8f6a'
-        }
-    ]
+        "nome": 'Victor',
+        "idade": 28,
+        "admin": true,
+        "_zid": 1
     }
 //
 ```
+
 
 ### addMany
 
@@ -117,26 +125,23 @@ const output = collection.addMany([
         descricao: 'Objeto teste 2'
     }
 ])
-console.log("output: ", output);
 
+console.log("output: ", output);
 // Resultado:
-    {
-    "data": [
+    [
         {
             "nome": 'teste 1',
             "descricao": 'Objeto teste 1',
-            "_ObjectId": '8a636bd6-48d8-479b-8bf4-24146867a692'
+            "_zid": 1
         },
         {
             "nome": 'teste 2',
             "descricao": 'Objeto teste 2',
-            "_ObjectId": 'a71dbb58-b529-419b-a21d-030b3201a948'
+            "_zid": 2
         }
     ]
-    }
 //
 ```
-
 
 
 
