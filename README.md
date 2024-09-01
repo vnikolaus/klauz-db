@@ -44,7 +44,7 @@ const kz = new KlauzDB({
 })
 ```
 
-Feito isso, você já pode criar suas coleções e utilizar as funcões do KlauzDB !
+Feito isso, você já pode criar suas Collections e utilizar todas as funcões da aplicação.
 
 ## 📖 Documentação
 
