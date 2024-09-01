@@ -104,7 +104,7 @@ add(valor)
 ```
 
 #### Parâmetros
-`valor: {}`<br><br>Objeto chave-valor utilizado para armazenar os dados dentro da Collection;
+`valor: { key: value }`<br><br>Objeto chave-valor utilizado para armazenar os dados dentro da Collection;
 
 #### Retorno
 Objeto adicionado já com as novas propriedades criadas pelo banco de dados;
