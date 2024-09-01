@@ -53,20 +53,20 @@ KlauzDB expõe apenas uma função:
 * `createCollection`
 
 ### createCollection()
-Habilita uma nova instância (Collection), e cria seu arquivo json para persistência de dados.
+Habilita uma nova instância Collection, e cria seu arquivo json para persistência de dados.
 
 #### Syntax
 ```js
 createCollection(nomeCollection)
 ```
 
-##### Parâmetros
-`nomeCollection: string`<br><br>Nome utilizado para criação de uma nova Collection e seu arquivo para persistência de dados;
+#### Parâmetros
+`nomeCollection: string`<br><br>Nome utilizado para criação de uma nova Collection e seu arquivo de persistência de dados;
 
-##### Retorno
-Instãncia propria da Collection habilitando acesso as funções de banco de dados;
+#### Retorno
+Instância própria da Collection habilitando acesso as funções de banco de dados;
 
-##### Exemplo
+#### Exemplo
 ```js
 const kz = new KlauzDB({
     path: './'
