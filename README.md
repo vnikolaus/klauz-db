@@ -84,11 +84,32 @@ console.log(collection.information)
 //
 ```
 
-Com sua collection criada agora você já tem acesso a todas as funções de banco de dados:
+Com sua collection criada agora você já tem acesso as seguintes funções de banco de dados:
+```js
+.add()
+.addMany()
+.find()
+.findAll()
+.update()
+.delete()
+.reset()
+```
 
 ### add()
-Adiciona um novo objeto (*chave-valor*) dentro da collection.
+Adiciona um novo objeto dentro da collection.
 
+#### Syntax
+```js
+add(valor)
+```
+
+#### Parâmetros
+`valor: {}`<br><br>Objeto chave-valor utilizado para armazenar os dados dentro da Collection;
+
+#### Retorno
+Objeto adicionado já com as novas propriedades criadas pelo banco de dados;
+
+#### Exemplo
 ```js
 const output = collection.add({
     nome: 'Victor',
@@ -106,7 +127,6 @@ console.log("output: ", output);
     }
 //
 ```
-
 
 ### addMany
 
