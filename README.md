@@ -66,6 +66,7 @@ createCollection(nomeCollection)
 ##### Retorno
 Instãncia propria da Collection habilitando acesso as funções de banco de dados;
 
+##### Exemplo
 ```js
 const kz = new KlauzDB({
     path: './'
