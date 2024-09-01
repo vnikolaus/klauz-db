@@ -138,10 +138,10 @@ addMany(valor)
 ```
 
 #### Parâmetros
-`valor: [{ key: value }, { key: value }]`<br><br>Array de objetos utilizado para inserir muitos dados de uma única vez dentro da Collection;
+`valor: [{ key: value }, { key: value }]`<br><br>Array utilizado para inserir diversos objetos de uma única vez dentro da Collection;
 
 #### Retorno
-Array com os dados adicionados já com as novas propriedades criadas pelo banco de dados;
+Array de objetos adicionados já com as novas propriedades criadas pelo banco de dados;
 
 #### Exemplo
 ```js
