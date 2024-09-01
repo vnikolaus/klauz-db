@@ -104,7 +104,7 @@ add(valor)
 ```
 
 #### Parâmetros
-`valor: { key: value }`<br><br>Objeto chave-valor utilizado para inserir dados dentro da Collection;
+`valor: { key: value }`<br><br>Objeto utilizado para inserir um único registro dentro da Collection;
 
 #### Retorno
 Objeto adicionado já com as novas propriedades criadas pelo banco de dados;
@@ -138,7 +138,7 @@ addMany(valor)
 ```
 
 #### Parâmetros
-`valor: [{ key: value }, { key: value }]`<br><br>Array utilizado para inserir diversos objetos de uma única vez dentro da Collection;
+`valor: [{ key: value }, { key: value }]`<br><br>Array utilizado para inserir diversos registros dentro da Collection;
 
 #### Retorno
 Array de objetos adicionados já com as novas propriedades criadas pelo banco de dados;
