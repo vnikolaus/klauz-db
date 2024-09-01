@@ -52,7 +52,7 @@ KlauzDB expõe apenas uma função:
 
 * `createCollection`
 
-## createCollection()
+### createCollection()
 Habilita uma nova instância (Collection), e cria seu arquivo json para persistência de dados.
 
 #### Syntax
