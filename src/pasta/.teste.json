@@ -1,0 +1,77 @@
+{
+  "collection_name": "teste",
+  "created_at": "2024-08-27T13:36:32.091Z",
+  "last_interaction": "2024-09-01T20:01:30.472Z",
+  "data": [
+    {
+      "name": "Client_1",
+      "permissions": {
+        "admin": true
+      },
+      "_zid": 1
+    },
+    {
+      "name": "Client_2",
+      "permissions": {
+        "admin": true
+      },
+      "_zid": 2
+    },
+    {
+      "name": "Client_3",
+      "permissions": {
+        "admin": true
+      },
+      "_zid": 3
+    },
+    {
+      "name": "Client_4",
+      "permissions": {
+        "admin": true
+      },
+      "_zid": 4
+    },
+    {
+      "name": "Client_5",
+      "permissions": {
+        "admin": true
+      },
+      "_zid": 5
+    },
+    {
+      "name": "Client_6",
+      "permissions": {
+        "admin": true
+      },
+      "_zid": 6
+    },
+    {
+      "name": "Client_7",
+      "permissions": {
+        "admin": true
+      },
+      "_zid": 7
+    },
+    {
+      "name": "Client_8",
+      "permissions": {
+        "admin": true
+      },
+      "_zid": 8
+    },
+    {
+      "name": "Client_9",
+      "permissions": {
+        "admin": true
+      },
+      "_zid": 9
+    },
+    {
+      "name": "Client_10",
+      "permissions": {
+        "admin": true
+      },
+      "_zid": 10
+    }
+  ]
+}

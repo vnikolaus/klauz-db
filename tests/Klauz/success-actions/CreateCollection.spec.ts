@@ -14,6 +14,7 @@ runTest('CreateCollection - success-actions', () => {
             path
         })
         const sut = kz.createCollection(collectionName) as any
+        expect(kz).toBeInstanceOf(KlauzDB)
         expect(sut).toBeInstanceOf(Collection)
         sut.drop()
     })

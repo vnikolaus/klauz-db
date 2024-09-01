@@ -1,22 +1,29 @@
-import { Collection } from "./Collection"
+// type UUID = `${string}-${string}-${string}-${string}-${string}`
+export type ZID = number
 
-type UUID = `${string}-${string}-${string}-${string}-${string}`
-export type ObjectId = UUID
-type ErrorPayload = {
-    error: string
-}
+// Functions
+type ErrorPayload = { error: string }
 export type Output<T> = T | ErrorPayload
 
-export type Operators = 'equals' | 'not_equals' | 'like' | 'not_like' | 'bigger_than' | 'less_than'
-export enum eOperators {
-    equals = 'equals' ,
-    not_equals = 'not_equals',
-    like = 'like',
-    not_like = 'not_like',
-    bigger_than = 'bigger_than',
-    less_than = 'less_than',
+export type KzObject<T> = T & { _zid: ZID }
+
+export type Callback<T> = (obj: T) => any
+
+// export enum eZID {
+//     uuid = 'uuid',
+//     numeric = 'numeric',
+// }
+// export type ZidTypes = 'uuid' | 'numeric'
+
+// export type AddOptions = {
+//     zidType?: ZidTypes,
+// }
+
+export type FindOptions = {
+    hideInfo?: Array<string>
 }
 
+// Klauz & Collection
 export type CollectionProps = {
     path: string
     name: string
@@ -26,15 +33,14 @@ export type CollectionContent = {
     collection_name: string,
     created_at: string,
     last_interaction: string,
-    data: Array<CollectionDataWithObjectId>
+    data: Array<CollectionDataWithZID>
 }
 
 export type CollectionData = Record<string, any>
-export type CollectionDataWithObjectId = { 
+export type CollectionDataWithZID = { 
     [K in keyof CollectionData]: CollectionData[K] 
-} & { _ObjectId?: ObjectId }
+} & { _zid?: ZID }
 
 export type KlauzProps = {
     path: string
 }
-

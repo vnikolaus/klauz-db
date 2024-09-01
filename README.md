@@ -34,7 +34,7 @@ const kz = new KlauzDB({
 })
 ```
 
-.. [or using ES6?]()
+.. or using ES6?
 
 ```javascript
 import { KlauzDB } from 'klauz-db'
@@ -44,7 +44,7 @@ const kz = new KlauzDB({
 })
 ```
 
-É isso. agora você já pode criar suas coleções e utilizar as funcões do KlauzDB !
+Feito isso, você já pode criar suas coleções e utilizar as funcões do KlauzDB !
 
 ## 📖 Documentation
 
@@ -61,16 +61,15 @@ const kz = new KlauzDB({
     path: './'
 })
 
-const collection = kz.createCollection('teste')
+const collection = kz.createCollection('coll-teste')
 
-console.log(collection.content)
+console.log(collection.information)
 
 // Resultado:
     {
-    "collection_name": "teste",
-    "created_at": "2024-08-04T22:41:57.416Z",
-    "last_interaction": "2024-08-04T22:41:57.416Z",
-    "data": []
+    "collection_name": "coll-teste",
+    "created_at": "2024-08-25T22:41:57.416Z",
+    "last_interaction": "2024-08-25:41:57.416Z",
     }
 //
 ```
@@ -83,23 +82,29 @@ Com sua collection criada agora você já tem acesso a todas as funções de ban
 
 ```js
 const output = collection.add({
-    nome: 'teste',
-    descricao: 'Objeto teste'
+    nome: 'Victor',
+    idade: 28,
+    admin: true
 })
 console.log("output: ", output);
 
 // Resultado:
     {
-    "nome": 'teste',
-    "descricao": 'Objeto teste',
-    "_ObjectId": '85136b83-eb3a-4673-a502-f59b337f8f6a'
+    "data": [
+        {
+            "nome": 'Victor',
+            "idade": 28,
+            "admin": true,
+            "_zid_": '85136b83-eb3a-4673-a502-f59b337f8f6a'
+        }
+    ]
     }
 //
 ```
 
 ### addMany
 
-`add` adiciona um novo array de objetos (*chave-valor*) dentro da collection.
+`addMany` adiciona um novo array de objetos (*chave-valor*) dentro da collection.
 
 ```js
 const output = collection.addMany([
@@ -115,7 +120,8 @@ const output = collection.addMany([
 console.log("output: ", output);
 
 // Resultado:
-    [
+    {
+    "data": [
         {
             "nome": 'teste 1',
             "descricao": 'Objeto teste 1',
@@ -127,6 +133,7 @@ console.log("output: ", output);
             "_ObjectId": 'a71dbb58-b529-419b-a21d-030b3201a948'
         }
     ]
+    }
 //
 ```
 

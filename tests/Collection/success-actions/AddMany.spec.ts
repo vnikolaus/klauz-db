@@ -1,7 +1,8 @@
 import { afterAll, afterEach, beforeAll, describe, expect, test } from '@jest/globals'
+import { randomInt } from 'crypto'
 import { Collection } from '../../../src/Collection'
 import { KlauzDB } from '../../../src/Klauz'
-import { generateData, Mock, REGEX_UUID } from '../../mocks/Utils'
+import { generateFakeData, Mock } from '../../mocks/Utils'
 
 const skipTest = (process.env.SKIP_ADDMANY_TEST == 'true')
 const runTest = skipTest ? describe.skip : describe
@@ -29,10 +30,11 @@ runTest('Method: ADDMANY | sucess-actions', () => {
         const objs = 10
         const collectionData = sut.findAll() as Mock
         expect(collectionData.length).toBe(0)
-        const mockData = generateData(objs) as Mock
+        const mockData = generateFakeData(objs) as Mock
         const addedData = sut.addMany(mockData) as Mock
+        const r = randomInt(objs)
         expect(addedData.length).toBe(objs)
-        expect(REGEX_UUID.test(addedData[0]._ObjectId)).toBe(true)
+        expect(typeof addedData[r]._zid).toBe('number')
         const collectionDataPostAddMany = sut.findAll() as Mock
         expect(collectionDataPostAddMany.length).toBe(objs)
     })
@@ -41,10 +43,11 @@ runTest('Method: ADDMANY | sucess-actions', () => {
         const objs = 50
         const collectionData = sut.findAll() as Mock
         expect(collectionData.length).toBe(0)
-        const mockData = generateData(objs) as Mock
+        const mockData = generateFakeData(objs) as Mock
         const addedData = sut.addMany(mockData) as Mock
+        const r = randomInt(objs)
         expect(addedData.length).toBe(objs)
-        expect(REGEX_UUID.test(addedData[0]._ObjectId)).toBe(true)
+        expect(typeof addedData[r]._zid).toBe('number')
         const collectionDataPostAddMany = sut.findAll() as Mock
         expect(collectionDataPostAddMany.length).toBe(objs)
     })
@@ -53,10 +56,11 @@ runTest('Method: ADDMANY | sucess-actions', () => {
         const objs = 100
         const collectionData = sut.findAll() as Mock
         expect(collectionData.length).toBe(0)
-        const mockData = generateData(objs) as Mock
+        const mockData = generateFakeData(objs) as Mock
         const addedData = sut.addMany(mockData) as Mock
+        const r = randomInt(objs)
         expect(addedData.length).toBe(objs)
-        expect(REGEX_UUID.test(addedData[0]._ObjectId)).toBe(true)
+        expect(typeof addedData[r]._zid).toBe('number')
         const collectionDataPostAddMany = sut.findAll() as Mock
         expect(collectionDataPostAddMany.length).toBe(objs)
     })
@@ -65,10 +69,11 @@ runTest('Method: ADDMANY | sucess-actions', () => {
         const objs = 500
         const collectionData = sut.findAll() as Mock
         expect(collectionData.length).toBe(0)
-        const mockData = generateData(objs) as Mock
+        const mockData = generateFakeData(objs) as Mock
         const addedData = sut.addMany(mockData) as Mock
+        const r = randomInt(objs)
         expect(addedData.length).toBe(objs)
-        expect(REGEX_UUID.test(addedData[0]._ObjectId)).toBe(true)
+        expect(typeof addedData[r]._zid).toBe('number')
         const collectionDataPostAddMany = sut.findAll() as Mock
         expect(collectionDataPostAddMany.length).toBe(objs)
     })
@@ -77,10 +82,11 @@ runTest('Method: ADDMANY | sucess-actions', () => {
         const objs = 1000
         const collectionData = sut.findAll() as Mock
         expect(collectionData.length).toBe(0)
-        const mockData = generateData(objs) as Mock
+        const mockData = generateFakeData(objs) as Mock
         const addedData = sut.addMany(mockData) as Mock
+        const r = randomInt(objs)
         expect(addedData.length).toBe(objs)
-        expect(REGEX_UUID.test(addedData[0]._ObjectId)).toBe(true)
+        expect(typeof addedData[r]._zid).toBe('number')
         const collectionDataPostAddMany = sut.findAll() as Mock
         expect(collectionDataPostAddMany.length).toBe(objs)
     })

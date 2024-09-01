@@ -1,7 +1,7 @@
-import { afterAll, beforeAll, describe, expect, test } from '@jest/globals'
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, test } from '@jest/globals'
 import { Collection } from '../../../src/Collection'
 import { KlauzDB } from '../../../src/Klauz'
-import { generateData, Mock, REGEX_UUID } from '../../mocks/Utils'
+import { generateFakeData, Mock } from '../../mocks/Utils'
 
 const skipTest = (process.env.SKIP_ADD_TEST == 'true')
 const runTest = skipTest ? describe.skip : describe
@@ -16,12 +16,19 @@ runTest('Method: ADD | sucess-actions', () => {
         sut = new KlauzDB({
             path
         }).createCollection(collectionName) as Collection
-        const data = generateData(mockObjects) as Mock
-        sut.addMany(data)
     })
 
     afterAll(() => {
         sut.drop()
+    })
+
+    beforeEach(() => {
+        const data = generateFakeData(mockObjects) as Mock
+        sut.addMany(data)
+    })
+
+    afterEach(() => {
+        sut.reset()
     })
 
     test('Test 1 - add', () => {
@@ -32,8 +39,11 @@ runTest('Method: ADD | sucess-actions', () => {
             client: `Jest_${mockObjects + 1}`,
             sut: false,
         }) as Mock
-        expect(resAdd).toHaveProperty('_ObjectId')
-        expect(REGEX_UUID.test(resAdd._ObjectId)).toBe(true)
+        expect(resAdd).toHaveProperty('_zid')
+        expect(typeof resAdd._zid).toBe('number')
+        expect(resAdd.id).toBe(mockObjects + 1)
+        expect(resAdd.client).toBe(`Jest_${mockObjects + 1}`)
+        expect(resAdd.sut).toBe(false)
         const collectionDataPostAdd = sut.findAll() as Mock
         expect(collectionDataPostAdd.length).toBe(mockObjects + 1)
     })

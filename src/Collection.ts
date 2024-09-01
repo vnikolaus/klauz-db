@@ -1,16 +1,16 @@
-import { randomUUID as uuid } from "crypto";
 import { accessSync, constants, readFileSync, unlinkSync, writeFileSync } from "fs";
 import z from 'zod';
 import { errorMessage } from "./Error";
 import {
+    Callback,
     CollectionContent,
     CollectionData,
-    CollectionDataWithObjectId,
+    CollectionDataWithZID,
     CollectionProps,
-    eOperators,
-    ObjectId,
-    Operators,
-    Output
+    FindOptions,
+    KzObject,
+    Output,
+    ZID
 } from "./Types";
 
 export class Collection {
@@ -50,78 +50,47 @@ export class Collection {
         writeFileSync(this.#path, JSON.stringify(content, null, 2))
     }
 
-    #setCollectionDataValue(data: CollectionDataWithObjectId): void {
+    #setCollectionDataValue(data: CollectionDataWithZID): void {
         this.#load()
         this.#content.last_interaction = new Date().toISOString()
         this.#content.data.push(data)
         this.#save(this.#content)
     }
 
-    #setCollectionData(data: CollectionDataWithObjectId[]): void {
+    #setCollectionData(data: CollectionDataWithZID[]): void {
         this.#load()
         this.#content.last_interaction = new Date().toISOString()
         this.#content.data = data
         this.#save(this.#content)
     }
 
-    #getCollectionData(): CollectionDataWithObjectId[] {
+    #getCollectionData(): CollectionDataWithZID[] {
         this.#load()
         return this.#content.data
     }
 
-    get name() {
-        return this.#name
+    #getLastNumericId(): ZID {
+        this.#load()
+        const lastObject = this.#content.data.findLast((obj: CollectionDataWithZID) => typeof obj._zid === 'number')
+        return lastObject?._zid ?? 0
     }
 
-    get content() {
-        return this.#content
-    }
-
-    findAll(): CollectionDataWithObjectId[] {
-        const collectionData = this.#getCollectionData()
-        return collectionData
-    }
-
-    findWhere(key: string, operator: Operators, value: any): Output<CollectionDataWithObjectId[]> {
-        try {
-            let output = [] as CollectionDataWithObjectId[]
-            if (!eOperators[operator]) throw Error('Invalid operator')
-            const zKey = z.string().min(1).parse(key)
-            const collectionData = this.#getCollectionData()
-            switch (operator) {
-                case eOperators.equals:
-                    output = collectionData.filter(el => el[zKey] === value)
-                break;
-                case eOperators.not_equals:
-                    output = collectionData.filter(el => el[zKey] !== value)
-                break;
-                case eOperators.like:
-                    output = collectionData.filter(el => String(el[zKey]).match(value))
-                break;
-                case eOperators.not_like:
-                    output = collectionData.filter(el => !String(el[zKey]).match(value))
-                break;
-                case eOperators.bigger_than:
-                    output = collectionData.filter(el => el[zKey] > value)
-                break;
-                case eOperators.less_than:
-                    output = collectionData.filter(el => el[zKey] < value)
-                break;
-            }
-            if (output.length === 0) throw Error('Registers not found')
-            return output
-        } catch (err) {
-            return errorMessage(err)
+    get information(): Omit<CollectionContent, 'data'> {
+        this.#load()
+        return {
+            collection_name: this.#content.collection_name,
+            created_at: this.#content.created_at,
+            last_interaction: this.#content.last_interaction,
         }
-        
     }
 
-    add(data: CollectionData): Output<CollectionDataWithObjectId> {
+    add(data: CollectionData): Output<CollectionDataWithZID> {
         try {
-            let obj = {} as CollectionDataWithObjectId
+            if (arguments.length > 1) throw TypeError('Invalid params')
             const schema = z.record(z.string(), z.any(), { message: `Content must be a object. Use 'addMany' method, to insert a new array` })
-            obj = schema.parse(data) as CollectionDataWithObjectId
-            Reflect.set(obj, '_ObjectId', uuid())
+            const obj = schema.parse(data) as CollectionDataWithZID
+            const lastId = this.#getLastNumericId()
+            Reflect.set(obj, '_zid', lastId + 1)
             this.#setCollectionDataValue(obj)
             return obj
         } catch (err) {
@@ -129,15 +98,16 @@ export class Collection {
         }
     }
 
-    addMany(data: CollectionData[]): Output<CollectionDataWithObjectId[]> {
+    addMany(data: CollectionData[]): Output<CollectionDataWithZID[]> {
         try {
-            let objs: CollectionDataWithObjectId[] = []
+            if (arguments.length > 1) throw TypeError('Invalid params')
             const schemaArray = z.array(z.record(z.string(), z.any()))
             const schemaObject = z.record(z.string(), z.any())
-            objs = schemaArray.parse(data)
+            const objs = schemaArray.parse(data) as CollectionDataWithZID[]
             for (const obj of objs) {
                 schemaObject.parse(obj)
-                Reflect.set(obj, '_ObjectId', uuid())
+                const lastId = this.#getLastNumericId()
+                Reflect.set(obj, '_zid', lastId + 1)
                 this.#setCollectionDataValue(obj)
             }
             return objs
@@ -146,86 +116,106 @@ export class Collection {
         }
     }
 
-    update(objectId: ObjectId, value: CollectionData): Output<void> {
+    findAll(options?: FindOptions): Output<CollectionDataWithZID[]> {
         try {
-            const zObjectId = z.string().uuid().parse(objectId)
-            const zValue = z.record(z.string(), z.any()).parse(value)
+            if (arguments.length > 1) throw TypeError('Invalid params')
             const collectionData = this.#getCollectionData()
-            const updatedData = collectionData.map(el => {
-                if (el._ObjectId === zObjectId) {
-                    const tempId = el._ObjectId
-                    Reflect.deleteProperty(el, '_ObjectId')
-                    el = {
-                        ...el,
-                        ...zValue,
-                        _ObjectId: tempId
+            const optionsSchema = z.object({
+                hideInfo: z.array(z.string()).optional(),
+            }).optional()
+            const zOpts = optionsSchema.parse(options) as FindOptions
+            if (zOpts) {
+                const keys = Object.keys(zOpts) as Array<keyof FindOptions>
+                for (const key of keys) {
+                    if (!zOpts[key]) continue
+                    switch (key) {
+                        case 'hideInfo':
+                            const infos = zOpts.hideInfo as NonNullable<FindOptions['hideInfo']>
+                            infos.forEach(info => {
+                                for (const obj of collectionData) {
+                                    if (!Reflect.has(obj, info)) continue
+                                    Reflect.deleteProperty(obj, info)
+                                }
+                            })
+                        break;
                     }
                 }
-                return el
-            }) as CollectionDataWithObjectId[]
-            this.#setCollectionData(updatedData)
+            }
+            return collectionData
         } catch (err) {
             return errorMessage(err)
         }
     }
 
-    updateMany(elements: CollectionDataWithObjectId[], value: CollectionData): Output<void> {
+    find<T>(cb: Callback<KzObject<T>>, options?: FindOptions): Output<CollectionDataWithZID[]> {
         try {
-            const schemaArray = z.array(z.record(z.string(), z.any()))
-            const schemaObject = z.record(z.string(), z.any())
-            const zValue = schemaObject.parse(value)
-            const array = schemaArray.parse(elements) as CollectionDataWithObjectId[]
-            const updatedIds: Array<string> = []
-            for (const obj of array) {
-                const zObj = schemaObject.parse(obj) as CollectionDataWithObjectId
-                zObj._ObjectId && updatedIds.push(zObj._ObjectId)
-            }
-            if (updatedIds.length === 0) throw Error('Ids not found')
+            if (arguments.length > 2) throw TypeError('Invalid params')
+            const callback = z.function().parse(cb)
+            const optionsSchema = z.object({
+                hideInfo: z.array(z.string()).optional(),
+            }).optional()
+            const zOpts = optionsSchema.parse(options) as FindOptions
             const collectionData = this.#getCollectionData()
-            const updatedData = collectionData.map(el => {
-                if (el._ObjectId && updatedIds.includes(el._ObjectId)) {
-                    const tempId = el._ObjectId
-                    Reflect.deleteProperty(el, '_ObjectId')
-                    el = {
-                        ...el,
-                        ...zValue,
-                        _ObjectId: tempId
+            const output = [] as CollectionDataWithZID[]
+            for (const obj of collectionData) {
+                if (callback.call(undefined, obj)) {
+                    if (zOpts) {
+                        const keys = Object.keys(zOpts) as Array<keyof FindOptions>
+                        for (const key of keys) {
+                            if (!zOpts[key]) continue
+                            switch (key) {
+                                case 'hideInfo':
+                                    const infos = zOpts.hideInfo as NonNullable<FindOptions['hideInfo']>
+                                    infos.forEach(info => Reflect.deleteProperty(obj, info))
+                                break;
+                            }
+                        }
                     }
-                }
-                return el
-            }) as CollectionDataWithObjectId[]
-            this.#setCollectionData(updatedData)
-        } catch (err) {
-            return errorMessage(err)
-        }
-    }
-
-    delete(objectId: ObjectId): Output<void> {
-        try {
-            const zObjectId = z.string().uuid().parse(objectId)
-            this.findWhere('_ObjectId', 'equals', zObjectId)
-            const collectionData = this.#getCollectionData()
-            const collectionDataAfterDeletion = collectionData.filter(obj => obj._ObjectId !== zObjectId)
-            this.#setCollectionData(collectionDataAfterDeletion)
-        } catch (err) {
-            return errorMessage(err)
-        }
-    }
-
-    deleteMany(elements: CollectionDataWithObjectId[]): Output<void> {
-        try {
-            const schemaArray = z.array(z.record(z.string(), z.any()))
-            const schemaObject = z.record(z.string(), z.any())
-            const array = schemaArray.parse(elements) as CollectionDataWithObjectId[]
-            const deletedIds: Array<string> = []
-            for (const obj of array) {
-                const zObj = schemaObject.parse(obj) as CollectionDataWithObjectId
-                if (zObj._ObjectId) deletedIds.push(zObj._ObjectId)
+                    output.push(obj)
+                } 
             }
-            if (deletedIds.length === 0) throw Error('Ids not found')
+            return output
+        } catch (err) {
+            return errorMessage(err)
+        }
+    }
+
+    update<T>(cb: Callback<KzObject<T>>, value: CollectionData): Output<CollectionDataWithZID[]> {
+        try {
+            if (arguments.length > 2) throw TypeError('Invalid params')
+            const callback = z.function().parse(cb)
+            const valueSchema = z.record(z.string(), z.any())
+            const zValue = valueSchema.parse(value)
+            const output = [] as CollectionDataWithZID[]
             const collectionData = this.#getCollectionData()
-            const collectionDataAfterDeletion = collectionData.filter(obj => obj._ObjectId && !deletedIds.includes(obj._ObjectId))
-            this.#setCollectionData(collectionDataAfterDeletion)
+            for (const obj of collectionData) {
+                if (callback.call(undefined, obj)) {
+                    const tempId = obj._zid as ZID
+                    Reflect.deleteProperty(obj, '_zid')
+                    Object.assign(obj, {
+                        ...obj,
+                        ...zValue,
+                        _zid: tempId
+                    })
+                    output.push(obj)
+                }
+            }
+            if (output.length === 0) throw Error('Data not found')
+            this.#setCollectionData(collectionData)
+            return output
+        } catch (err) {
+            return errorMessage(err)
+        }
+    }
+
+    delete<T>(cb: Callback<KzObject<T>>): Output<void> {
+        try {
+            if (arguments.length > 1) throw TypeError('Invalid params')
+            const callback = z.function().parse(cb)
+            const collectionData = this.#getCollectionData()
+            const dataPostDelete = collectionData.filter(obj => !callback(obj)) as CollectionDataWithZID[]
+            if (collectionData.length === dataPostDelete.length) return
+            this.#setCollectionData(dataPostDelete)
         } catch (err) {
             return errorMessage(err)
         }
@@ -234,7 +224,7 @@ export class Collection {
     reset(): Output<void> {
         try {
             this.#load()
-            const arr = [] as CollectionDataWithObjectId[]
+            const arr = [] as CollectionDataWithZID[]
             this.#setCollectionData(arr)
         } catch (err) {
             return errorMessage(err)

@@ -1,7 +1,6 @@
 import z from 'zod';
 import { Collection } from "./Collection";
-import { errorMessage } from './Error';
-import { KlauzProps, Output } from "./Types";
+import { KlauzProps } from "./Types";
 
 export class KlauzDB {
     public path: string = ''
