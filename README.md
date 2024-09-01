@@ -52,7 +52,7 @@ KlauzDB expõe apenas uma função:
 
 * `createCollection`
 
-### createCollection
+### createCollection()
 Habilita uma nova instância (Collection), e cria seu arquivo json para persistência de dados.
 
 #### Syntax
@@ -75,7 +75,6 @@ const kz = new KlauzDB({
 const collection = kz.createCollection('coll-teste')
 
 console.log(collection.information)
-
 // Resultado:
     {
         "collection_name": "coll-teste",
@@ -87,9 +86,8 @@ console.log(collection.information)
 
 Com sua collection criada agora você já tem acesso a todas as funções de banco de dados:
 
-### add
-
-`add` adiciona um novo objeto (*chave-valor*) dentro da collection.
+### add()
+Adiciona um novo objeto (*chave-valor*) dentro da collection.
 
 ```js
 const output = collection.add({
