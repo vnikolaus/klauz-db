@@ -46,13 +46,13 @@ const kz = new KlauzDB({
 
 Feito isso, você já pode criar suas coleções e utilizar as funcões do KlauzDB !
 
-## 📖 Documentation
+## 📖 Documentação
 
 KlauzDB expõe apenas uma função:
 
 * `createCollection`
 
-### createCollection()
+## createCollection()
 Habilita uma nova instância (Collection), e cria seu arquivo json para persistência de dados.
 
 #### Syntax
