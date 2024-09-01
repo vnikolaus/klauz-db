@@ -104,7 +104,7 @@ add(valor)
 ```
 
 #### Parâmetros
-`valor: { key: value }`<br><br>Objeto chave-valor utilizado para armazenar os dados dentro da Collection;
+`valor: { key: value }`<br><br>Objeto chave-valor utilizado para inserir dados dentro da Collection;
 
 #### Retorno
 Objeto adicionado já com as novas propriedades criadas pelo banco de dados;
@@ -127,11 +127,23 @@ console.log("output: ", output);
     }
 //
 ```
+<br>
 
-### addMany
+### addMany()
+Adiciona um novo array de objetos dentro da collection.
 
-`addMany` adiciona um novo array de objetos (*chave-valor*) dentro da collection.
+#### Syntax
+```js
+addMany(valor)
+```
 
+#### Parâmetros
+`valor: [{ key: value }, { key: value }]`<br><br>Array de objetos utilizado para inserir muitos dados de uma única vez dentro da Collection;
+
+#### Retorno
+Array com os dados adicionados já com as novas propriedades criadas pelo banco de dados;
+
+#### Exemplo
 ```js
 const output = collection.addMany([
     {
