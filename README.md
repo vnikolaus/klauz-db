@@ -53,7 +53,7 @@ KlauzDB expõe apenas uma função:
 * `createCollection`
 
 ### createCollection
-`createCollection` cria uma nova *collection* de dados.
+    Cria uma nova *collection* de dados.
 
 #### Syntax
 ```js
@@ -61,11 +61,9 @@ createCollection(nomeCollection)
 ```
 
 ##### Parametros
-`nomeCollection`
-    Nome utilizado (*string*) para criação da Collection e seu arquivo de persistência de dados;
+`nomeCollection`<br>Nome (*string*) utilizado para criação da Collection e seu arquivo de persistência de dados;
 
-##### Retorno
-    Instãncia propria da Collection habilitando acesso as funções de banco de dados;
+Retorno<br>Instãncia propria da Collection habilitando acesso as funções de banco de dados;
 
 ```js
 const kz = new KlauzDB({
