@@ -7,8 +7,8 @@ Ideal para testes automatizados, vídeo-aulas ou aplicações com um grau menor 
 <br>
 
 * [🌱 Instalação](#-Instalação)
-* [🏗️ Usage (.env)](#%EF%B8%8F-usage)
-* [📖 Docs](#-documentation)
+* [🏗️ Usage (.env)](#%EF%B8%8F-Usabilidade)
+* [📖 Docs](#-Documentação)
 <!-- * [📚 Examples](#-examples) -->
 <!-- * [❓ FAQ](#-faq) -->
 <!-- * [⏱️ Changelog](./CHANGELOG.md) -->
