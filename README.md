@@ -189,8 +189,7 @@ Array de objetos já com as novas alterações;
 
 #### Exemplo
 ```js
-// Alterando uma propriedade "admin" para true
-
+// Adicionando dois usuarios dentro da Collection
 collection.addMany([
     {
         nome: 'User_1',
@@ -201,6 +200,9 @@ collection.addMany([
         admin: false
     }
 ])
+
+
+// Alteração da propriedade "admin" para true
 
 // Syntax JavaScript antiga
 const output = collection.update(function(obj) {
