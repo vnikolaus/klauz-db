@@ -184,7 +184,7 @@ update(callback, value)
 
 #### Parâmetros
 `callback: function(obj)`<br><br>Função callback que recebe como parâmetro os objetos contidos na Collection.<br>Seu retorno deve ser os objetos que serão atualizados;<br><br>
-`value: { key: value }`<br><br>Valor a ser alterado;
+`value: { key: value }`<br><br>Objeto chave-valor com os valores a serem alterados;
 
 #### Retorno
 Array de objetos já com as novas alterações;
