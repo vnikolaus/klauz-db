@@ -58,7 +58,7 @@ Habilita uma nova instância Collection, e cria seu arquivo json para persistên
 
 #### Syntax
 ```js
-createCollection(nomeCollection)
+kz.createCollection(nomeCollection)
 ```
 
 #### Parâmetros
@@ -102,7 +102,7 @@ Adiciona um novo objeto dentro da collection.
 
 #### Syntax
 ```js
-add(valor)
+collection.add(valor)
 ```
 
 #### Parâmetros
@@ -134,7 +134,7 @@ Adiciona um novo array de objetos dentro da collection.
 
 #### Syntax
 ```js
-addMany(valor)
+collection.addMany(valor)
 ```
 
 #### Parâmetros
@@ -179,7 +179,7 @@ Altera um ou mais objetos dentro da Collection.
 
 #### Syntax
 ```js
-update(callback, value)
+collection.update(callback, value)
 ```
 
 #### Parâmetros
@@ -247,7 +247,7 @@ Remove um ou mais objetos da Collection.
 
 #### Syntax
 ```js
-delete(callback)
+collection.delete(callback)
 ```
 
 #### Parâmetros
