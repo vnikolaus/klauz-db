@@ -204,7 +204,7 @@ collection.addMany([
 
 // Alterando dados
 
-// Syntax JavaScript antiga
+// Syntax JavaScript antiga:
 const output = collection.update(function(obj) {
     if (obj.nome === 'User_1') {
         return obj
@@ -212,14 +212,14 @@ const output = collection.update(function(obj) {
 }, { admin: true })
 
 
-// Syntax JavaScript moderna
+// Syntax JavaScript moderna:
 const output = collection.update(obj => obj.nome === 'User_1', { admin: true })
 
 
-// Syntax TypeScript
-// Habilita tipagem das propriedades do objeto, incluindo a propriedade '_zid' como padrão.
+// Typescript- Utiliza Generics para habilitar a tipagem das propriedades do objeto, incluindo a propriedade '_zid' como padrão.
+// Syntax:
 type User = { nome: string, admin: boolean }
-const output = collection.update<User>(obj => obj.nome === 'User_1', { admin: true })
+const output = collection.update<User>(obj => obj._zid_ === 1, { admin: true })
 
 
 console.log("output: ", output);
