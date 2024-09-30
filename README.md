@@ -172,6 +172,7 @@ console.log("output: ", output);
     ]
 //
 ```
+<br>
 
 ### update
 Altera um ou mais objetos dentro da Collection.
