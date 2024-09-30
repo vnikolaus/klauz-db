@@ -216,10 +216,10 @@ const output = collection.update(function(obj) {
 const output = collection.update(obj => obj.nome === 'User_1', { admin: true })
 
 
-// Typescript- Utiliza Generics para habilitar a tipagem das propriedades do objeto, incluindo a propriedade '_zid' como padrão.
-// Syntax:
+// Syntax Typescript:
+// Utiliza Generics para habilitar a tipagem dos objetos, incluindo a propriedade '_zid' como padrão.
 type User = { nome: string, admin: boolean }
-const output = collection.update<User>(obj => obj._zid_ === 1, { admin: true })
+const output = collection.update<User>(obj => obj._zid === 1, { admin: true })
 
 
 console.log("output: ", output);
