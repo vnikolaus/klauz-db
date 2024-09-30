@@ -89,10 +89,10 @@ Com sua collection criada agora você já tem acesso as seguintes funções de b
 ```js
 .add()
 .addMany()
-.find()
-.findAll()
 .update()
 .delete()
+.findAll()
+.find()
 .reset()
 ```
 
@@ -166,6 +166,66 @@ console.log("output: ", output);
         {
             "nome": "User_2",
             "admin": false,
+            "_zid": 2
+        }
+    ]
+//
+```
+
+### update
+Altera um objeto dentro da Collection.
+
+#### Syntax
+```js
+update(callback, value)
+```
+
+#### Parâmetros
+`callback: function(obj)`<br><br>Função callback que recebe como parâmetro os objetos contidos na Collection. Seu retorno deve ser os objetos que serão atualizados;
+`value: { key: value }`<br><br>Valor a ser alterado;
+
+#### Retorno
+Array de objetos já com as novas alterações;
+
+#### Exemplo
+```js
+collection.addMany([
+    {
+        nome: 'User_1',
+        admin: true
+    },
+    {
+        nome: 'User_2',
+        admin: false
+    }
+])
+
+// Syntax JavaScript antiga
+const output = collection.update(function(obj) {
+    if (obj.admin === false) {
+        return obj
+    }
+}, { admin: true })
+
+// Syntax JavaScript moderna
+const output = collection.update(obj => obj.admin === false, { admin: true })
+
+// Syntax TypeScript
+// Habilita tipagem das propriedades do objeto
+type User = { nome: string, admin: boolean }
+const output = collection.update<User>(obj => obj.admin === false, { admin: true })
+
+console.log("output: ", output);
+// Resultado:
+    [
+        {
+            "nome": "User_1",
+            "admin": true,
+            "_zid": 1
+        },
+        {
+            "nome": "User_2",
+            "admin": true,
             "_zid": 2
         }
     ]
