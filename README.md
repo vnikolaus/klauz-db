@@ -189,7 +189,7 @@ Array de objetos já com as novas alterações;
 
 #### Exemplo
 ```js
-// Alterando as propriedades "admin" para true
+// Alterando todas as propriedades "admin" para true
 
 collection.addMany([
     {
@@ -209,16 +209,19 @@ const output = collection.update(function(obj) {
     }
 }, { admin: true })
 
+
 // Syntax JavaScript moderna
 const output = collection.update(obj => obj.admin === false, { admin: true })
+
 
 // Syntax TypeScript
 // Habilita tipagem das propriedades do objeto
 type User = { nome: string, admin: boolean }
 const output = collection.update<User>(obj => obj.admin === false, { admin: true })
 
+
 console.log("output: ", output);
-// Resultado:
+// Em todos os exemplos o output segue o mesmo, resultado:
     [
         {
             "nome": "User_1",
