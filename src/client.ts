@@ -34,8 +34,8 @@ function generateFakeData(qty: number): Mock[] {
     // const fakeData = generateFakeData(10)
     // const output = collection.addMany(fakeData)
 
-    // const newData = collection.update<Objeto>(obj => obj._zid === 'be044d8b-0e10-49c2-932c-20e839b5e90c', {
-    //     name: 'User 1-1' 
+    // const newData = collection.update<Objeto>(obj => obj._zid === 1, {
+    //     name: 'Client_1_1' 
     // })
     // console.log("newData: ", newData);
 
