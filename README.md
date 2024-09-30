@@ -240,6 +240,67 @@ console.log("output: ", output);
     ]
 //
 ```
+<br>
 
+### delete
+Remove um ou mais objetos da Collection.
+
+#### Syntax
+```js
+.delete(callback)
+```
+
+#### Parâmetros
+`callback: function(obj)`<br><br>Função callback que recebe como parâmetro os objetos contidos na Collection.<br>Seu retorno deve ser os objetos que serão removidos;<br><br>
+
+#### Retorno
+Não possui retorno;
+
+#### Exemplo
+```js
+// Adicionando dados
+collection.addMany([
+    {
+        nome: 'User_1',
+        admin: false
+    },
+    {
+        nome: 'User_2',
+        admin: false
+    }
+])
+
+
+// Deletando dados
+
+// Syntax JavaScript antiga:
+collection.delete(function(obj) {
+    if (obj.nome === 'User_1') {
+        return obj
+    }
+})
+
+
+// Syntax JavaScript moderna:
+collection.delete(obj => obj.nome === 'User_1')
+
+
+// Syntax Typescript:
+// Utiliza Generics para habilitar a tipagem dos objetos, incluindo a propriedade '_zid' como padrão.
+type User = { nome: string, admin: boolean };
+collection.delete<User>(obj => obj._zid === 1)
+
+
+console.log("collection.findAll(): ", collection.findAll());
+// Em todos os exemplos o output segue o mesmo:
+    [
+        {
+            "nome": "User_2",
+            "admin": false,
+            "_zid": 2
+        }
+    ]
+//
+```
 
 
