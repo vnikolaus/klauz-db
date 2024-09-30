@@ -189,6 +189,8 @@ Array de objetos já com as novas alterações;
 
 #### Exemplo
 ```js
+// Alterando as propriedades "admin" para true
+
 collection.addMany([
     {
         nome: 'User_1',
