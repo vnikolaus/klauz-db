@@ -42,15 +42,15 @@ function generateFakeData(qty: number): Mock[] {
     // collection.delete<Objeto>(obj => obj._zid > 9)
     // collection.reset()
 
-    const data = collection.find<Objeto>(obj => obj.permissions.admin === true, {
-        // hideInfo: ['_zid']
-    })
-    console.log("data: ", data);
-
-    // const allData = collection.findAll({
-    //     // hideInfo: ['permissions'],
+    // const data = collection.find<Objeto>(obj => obj.permissions.admin === true, {
+    //     // hideInfo: ['_zid']
     // })
-    // console.log("allData: ", allData);
+    // console.log("data: ", data);
+
+    const allData = collection.findAll({
+        // hideInfo: ['permissions'],
+    })
+    console.log("allData: ", allData);
 
 
     // const info = collection.information

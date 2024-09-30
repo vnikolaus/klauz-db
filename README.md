@@ -292,7 +292,7 @@ collection.delete<User>(obj => obj.nome === 'User_1')
 
 
 console.log("collection.findAll(): ", collection.findAll());
-// Em todos os exemplos o output segue o mesmo:
+// Em todos os exemplos o resultado segue o mesmo:
     [
         {
             "nome": "User_2",
