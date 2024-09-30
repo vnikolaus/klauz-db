@@ -288,7 +288,7 @@ collection.delete(obj => obj.nome === 'User_1')
 // Syntax Typescript:
 // Utiliza Generics para habilitar a tipagem dos objetos, incluindo a propriedade '_zid' como padrão.
 type User = { nome: string, admin: boolean };
-collection.delete<User>(obj => obj._zid === 1)
+collection.delete<User>(obj => obj.nome === 'User_1')
 
 
 console.log("collection.findAll(): ", collection.findAll());
