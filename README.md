@@ -194,7 +194,7 @@ Array de objetos já com as novas alterações;
 collection.addMany([
     {
         nome: 'User_1',
-        admin: true
+        admin: false
     },
     {
         nome: 'User_2',
@@ -221,7 +221,7 @@ const output = collection.update<User>(obj => obj.admin === false, { admin: true
 
 
 console.log("output: ", output);
-// Em todos os exemplos o output segue o mesmo, resultado:
+// Em todos os exemplos o output segue o mesmo:
     [
         {
             "nome": "User_1",
