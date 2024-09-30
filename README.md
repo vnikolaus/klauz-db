@@ -95,6 +95,7 @@ Com sua collection criada agora você já tem acesso as seguintes funções de b
 .find()
 .reset()
 ```
+<br>
 
 ### add
 Adiciona um novo objeto dentro da collection.
