@@ -247,7 +247,7 @@ Remove um ou mais objetos da Collection.
 
 #### Syntax
 ```js
-.delete(callback)
+delete(callback)
 ```
 
 #### Parâmetros
