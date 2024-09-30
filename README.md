@@ -189,7 +189,7 @@ Array de objetos já com as novas alterações;
 
 #### Exemplo
 ```js
-// Adicionando dois usuarios dentro da Collection
+// Adicionando usuarios dentro da Collection
 collection.addMany([
     {
         nome: 'User_1',
