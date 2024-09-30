@@ -1,7 +1,7 @@
 {
   "collection_name": "teste",
   "created_at": "2024-08-27T13:36:32.091Z",
-  "last_interaction": "2024-09-01T20:01:30.472Z",
+  "last_interaction": "2024-09-21T02:14:02.564Z",
   "data": [
     {
       "name": "Client_1",
@@ -65,13 +65,6 @@
         "admin": true
       },
       "_zid": 9
-    },
-    {
-      "name": "Client_10",
-      "permissions": {
-        "admin": true
-      },
-      "_zid": 10
     }
   ]
 }

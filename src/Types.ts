@@ -1,4 +1,3 @@
-// type UUID = `${string}-${string}-${string}-${string}-${string}`
 export type ZID = number
 
 // Functions
@@ -8,16 +7,6 @@ export type Output<T> = T | ErrorPayload
 export type KzObject<T> = T & { _zid: ZID }
 
 export type Callback<T> = (obj: T) => any
-
-// export enum eZID {
-//     uuid = 'uuid',
-//     numeric = 'numeric',
-// }
-// export type ZidTypes = 'uuid' | 'numeric'
-
-// export type AddOptions = {
-//     zidType?: ZidTypes,
-// }
 
 export type FindOptions = {
     hideInfo?: Array<string>

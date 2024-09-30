@@ -34,7 +34,7 @@ const kz = new KlauzDB({
 })
 ```
 
-.. or using ES6?
+ES6:
 
 ```javascript
 import { KlauzDB } from 'klauz-db'
@@ -44,7 +44,7 @@ const kz = new KlauzDB({
 })
 ```
 
-Feito isso, você já pode criar suas Collections de dados.
+Feito isso, você já pode criar suas Collections.
 <br>
 
 ## 📖 Documentação
@@ -96,7 +96,7 @@ Com sua collection criada agora você já tem acesso as seguintes funções de b
 .reset()
 ```
 
-### add()
+### add
 Adiciona um novo objeto dentro da collection.
 
 #### Syntax
@@ -113,24 +113,22 @@ Objeto adicionado já com as novas propriedades criadas pelo banco de dados;
 #### Exemplo
 ```js
 const output = collection.add({
-    nome: 'Victor',
-    idade: 28,
+    nome: 'User_1',
     admin: true
 })
 
 console.log("output: ", output);
 // Resultado:
     {
-        "nome": 'Victor',
-        "idade": 28,
-        "admin": true,
+        "nome": "User_1",
+        "admin": true
         "_zid": 1
     }
 //
 ```
 <br>
 
-### addMany()
+### addMany
 Adiciona um novo array de objetos dentro da collection.
 
 #### Syntax
@@ -148,12 +146,12 @@ Array de objetos adicionados já com as novas propriedades criadas pelo banco de
 ```js
 const output = collection.addMany([
     {
-        nome: 'teste 1',
-        descricao: 'Objeto teste 1'
+        nome: 'User_1',
+        admin: true
     },
     {
-        nome: 'teste 2',
-        descricao: 'Objeto teste 2'
+        nome: 'User_2',
+        admin: false
     }
 ])
 
@@ -161,13 +159,13 @@ console.log("output: ", output);
 // Resultado:
     [
         {
-            "nome": 'teste 1',
-            "descricao": 'Objeto teste 1',
+            "nome": "User_1",
+            "admin": true,
             "_zid": 1
         },
         {
-            "nome": 'teste 2',
-            "descricao": 'Objeto teste 2',
+            "nome": "User_2",
+            "admin": false,
             "_zid": 2
         }
     ]
