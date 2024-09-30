@@ -173,7 +173,7 @@ console.log("output: ", output);
 ```
 
 ### update
-Altera um objeto dentro da Collection.
+Altera um ou mais objetos dentro da Collection.
 
 #### Syntax
 ```js
@@ -181,7 +181,7 @@ update(callback, value)
 ```
 
 #### Parâmetros
-`callback: function(obj)`<br><br>Função callback que recebe como parâmetro os objetos contidos na Collection. Seu retorno deve ser os objetos que serão atualizados;
+`callback: function(obj)`<br><br>Função callback que recebe como parâmetro os objetos contidos na Collection.<br>Seu retorno deve ser os objetos que serão atualizados;
 `value: { key: value }`<br><br>Valor a ser alterado;
 
 #### Retorno
