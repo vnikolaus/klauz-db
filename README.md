@@ -353,6 +353,7 @@ console.log("output1", output1);
     ]
 //
 
+
 // Com opções
 const output2 = collection.findAll({
     hideInfo: ['admin', '_zid'] // hideInfo: Esconde as informações indicadas;
