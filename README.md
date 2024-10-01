@@ -302,5 +302,72 @@ console.log("collection.findAll(): ", collection.findAll());
     ]
 //
 ```
+<br>
 
+### findAll
+Retorna todos os dados contidos dentro da Collection.
+
+#### Syntax
+```js
+collection.findAll(options?)
+```
+
+#### Parâmetros
+`options: { hideInfo: Array<string> }`<br><br>Opções disponíveis para tratar o retorno dos dados;<br><br>
+
+#### Retorno
+Dados persistidos na Collection;
+
+#### Exemplo
+```js
+// Adicionando dados
+collection.addMany([
+    {
+        nome: 'User_1',
+        admin: false
+    },
+    {
+        nome: 'User_2',
+        admin: false
+    }
+])
+
+
+// Consultando dados
+
+const output1 = collection.findAll()
+console.log("output1", output1);
+// Resultado:
+    [
+        {
+            "nome": "User_1",
+            "admin": false,
+            "_zid": 1
+        },
+                {
+            "nome": "User_2",
+            "admin": false,
+            "_zid": 2
+        }
+    ]
+//
+
+
+const output2 = collection.findAll({
+    hideInfo: ['admin'] // hideInfo: Esconde as informações indicadas;
+})
+console.log("output2", output2);
+// Resultado:
+    [
+        {
+            "nome": "User_1",
+            "_zid": 1
+        },
+                {
+            "nome": "User_2",
+            "_zid": 2
+        }
+    ]
+//
+```
 
