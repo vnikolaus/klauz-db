@@ -364,7 +364,7 @@ console.log("output2", output2);
         {
             "nome": "User_1",
         },
-                {
+        {
             "nome": "User_2",
         }
     ]
