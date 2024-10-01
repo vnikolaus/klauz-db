@@ -335,6 +335,7 @@ collection.addMany([
 
 // Consultando dados
 
+// Sem opções
 const output1 = collection.findAll()
 console.log("output1", output1);
 // Resultado:
@@ -352,20 +353,18 @@ console.log("output1", output1);
     ]
 //
 
-
+// Com opções
 const output2 = collection.findAll({
-    hideInfo: ['admin'] // hideInfo: Esconde as informações indicadas;
+    hideInfo: ['admin', '_zid'] // hideInfo: Esconde as informações indicadas;
 })
 console.log("output2", output2);
 // Resultado:
     [
         {
             "nome": "User_1",
-            "_zid": 1
         },
                 {
             "nome": "User_2",
-            "_zid": 2
         }
     ]
 //
